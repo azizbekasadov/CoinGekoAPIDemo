@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ExchangeRatesView: View {
-    @StateObject private var viewModel = ExchangeRatesViewModel()
+    @StateObject private var viewModel: ExchangeRatesViewModel
+    
+    init(viewModel: ExchangeRatesViewModel) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,6 +32,6 @@ struct ExchangeRatesView: View {
 }
 
 #Preview {
-    ExchangeRatesView()
+    ExchangeRatesViewFactory.make()
         .frame(width: 720, height: 480)
 }

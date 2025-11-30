@@ -17,16 +17,15 @@ struct ExchangeData: Identifiable, Decodable {
 final class ExchangeRatesViewModel: ObservableObject {
     @Published var exchangeRates: [ExchangeData] = []
     
-    private let service: ClientAPIServiceProto
+    private let repo: ExchangeRatesRepositoryProto
     
-    init(service: ClientAPIServiceProto = ClientAPIService()) {
-        self.service = service
+    init(repo: ExchangeRatesRepositoryProto) {
+        self.repo = repo
     }
     
     func getExchangeRates() async {
         do {
-            let data = try await service.request(with: ExchangesRoute.exchangesList)
-            self.exchangeRates = try JSONDecoder().decode([ExchangeData].self, from: data)
+            self.exchangeRates = try await repo.loadList()
         } catch {
             debugPrint(error.localizedDescription)
         }

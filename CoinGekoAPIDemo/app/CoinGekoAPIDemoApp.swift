@@ -9,7 +9,7 @@ struct CoinGekoAPIDemoApp: App {
             NavigationSplitView {
                 SidebarView()
             } detail: {
-                ExchangeRatesView()
+                ExchangeRatesViewFactory.make()
             }
 
         }
