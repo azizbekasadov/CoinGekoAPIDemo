@@ -19,7 +19,7 @@ struct ExchangeRatesView: View {
                 .listStyle(.inset)
                 .padding(.horizontal, -16)
             }
-            .padding(16)
+            .padding([.horizontal, .top], 16)
         }
         .task {
             await viewModel.getExchangeRates()
